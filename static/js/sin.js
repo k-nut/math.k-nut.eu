@@ -30,13 +30,13 @@ for (var x=-100; x<=100; x += 1){
 	topcircle.push([xValue,positiveYvalue]);
 	bottomcircle.push([xValue, -1*positiveYvalue]);
 }
-var plotdata_einheitskreis = 
+var plotdata_unit_circle = 
 [
 	{data: topcircle,    color: "black"}, 
 	{data: bottomcircle, color: "black"}
 ];
 
-var einheitskreis = $.plot($("#einheitskreis"),  plotdata_einheitskreis,
+var unit_circle = $.plot($("#unit_circle"),  plotdata_unit_circle,
 {
 	xaxis:{
 		min :-1.5,
@@ -49,18 +49,19 @@ var einheitskreis = $.plot($("#einheitskreis"),  plotdata_einheitskreis,
 }
 );
 
-o = einheitskreis.pointOffset({ x: 1, y: 0});
-$("#einheitskreis").append('<div id="test" style="position:absolute;left:' + (o.left+5) + 'px;top:' + (o.top-27/2) + 'px;color:#666;font-size:smaller">0/2\u03c0</div>');
-o = einheitskreis.pointOffset({ x: 0, y: 1});
-$("#einheitskreis").append('<div id="test" style="position:absolute;left:' + (o.left-5) + 'px;top:' + (o.top-27) + 'px;color:#666;font-size:smaller">\u03c0/2</div>');
-o = einheitskreis.pointOffset({ x: -1, y: 0});
-$("#einheitskreis").append('<div id="test" style="position:absolute;left:' + (o.left-15) + 'px;top:' + (o.top-27/2) + 'px;color:#666;font-size:smaller">\u03c0</div>');
-o = einheitskreis.pointOffset({ x: 0, y: -1});
-$("#einheitskreis").append('<div id="test" style="position:absolute;left:' + (o.left-10) + 'px;top:' + (o.top) + 'px;color:#666;font-size:smaller">3\u03c0/2</div>');
+o = unit_circle.pointOffset({ x: 1, y: 0});
+$("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left+5) + 'px;top:' + (o.top-27/2) + 'px;color:#666;font-size:smaller">0/2\u03c0</div>');
+o = unit_circle.pointOffset({ x: 0, y: 1});
+$("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left-5) + 'px;top:' + (o.top-27) + 'px;color:#666;font-size:smaller">\u03c0/2</div>');
+o = unit_circle.pointOffset({ x: -1, y: 0});
+$("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left-15) + 'px;top:' + (o.top-27/2) + 'px;color:#666;font-size:smaller">\u03c0</div>');
+o = unit_circle.pointOffset({ x: 0, y: -1});
+$("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left-10) + 'px;top:' + (o.top) + 'px;color:#666;font-size:smaller">3\u03c0/2</div>');
 
 function newsin(){
 	var sinepointer = [];
-	var angle = $("#angle").val();
+	var angle = $("#angle").val() * Math.PI; //* Math.PI;
+	console.log(angle);
 	var height = Math.sin(angle);
 	var distance = Math.cos(angle);
 	var sinus = [[distance, 0], [distance, height]];
@@ -75,12 +76,12 @@ function newsin(){
 	]);
 	sinewave_plot.draw();
 
-	var new_plotdata_einheitskreis = plotdata_einheitskreis;
-	new_plotdata_einheitskreis[2] = {data: sinepointer, color:"blue"};
-	new_plotdata_einheitskreis[3] = {data: sinus, color:"red"};
+	var new_plotdata_unit_circle = plotdata_unit_circle;
+	new_plotdata_unit_circle[2] = {data: sinepointer, color:"blue"};
+	new_plotdata_unit_circle[3] = {data: sinus, color:"red"};
 
-	einheitskreis.setData(new_plotdata_einheitskreis);
-	einheitskreis.draw();
+	unit_circle.setData(new_plotdata_unit_circle);
+	unit_circle.draw();
 
 	// Set Degree legend
 	var angle_in_degree = Math.round(angle*180/Math.PI);
@@ -90,8 +91,8 @@ function newsin(){
 }
 
 function tofraction(n){
-	if (n === 0){
-		return 0;
+	if (n % 1 === 0){
+		return n;
 	}
 	var length = n.toString().length -2;
 	var nenner = Math.pow(10, length);
