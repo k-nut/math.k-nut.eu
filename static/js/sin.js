@@ -3,20 +3,20 @@ for (var i = 0; i < 2*Math.PI+0.2; i += 0.1){
 	sinewave.push([i, Math.sin(i)]);
 }
 var sinewave_plot = $.plot($("#placeholder"), [sinewave],
-{
-	canvas: true,
-	xaxis: {
-		min: 0,
-		max: Math.PI*2,
-		ticks: [
-			0, [ Math.PI/2, "\u03c0/2" ], [ Math.PI, "\u03c0" ],
-			[ Math.PI * 3/2, "3\u03c0/2" ], [ Math.PI * 2, "2\u03c0" ]
-		]
-	},
-	yaxis: {
-		min: -1.5,
-		max: 1.5
-	}
+		{
+canvas: true,
+xaxis: {
+min: 0,
+max: Math.PI*2,
+ticks: [
+0, [ Math.PI/2, "\u03c0/2" ], [ Math.PI, "\u03c0" ],
+[ Math.PI * 3/2, "3\u03c0/2" ], [ Math.PI * 2, "2\u03c0" ]
+]
+},
+yaxis: {
+min: -1.5,
+max: 1.5
+}
 });
 
 // Draw Einheitskreis 
@@ -32,23 +32,24 @@ for (var x=-100; x<=100; x += 1){
 }
 var plotdata_unit_circle = 
 [
-	{data: topcircle,    color: "black"}, 
-	{data: bottomcircle, color: "black"}
+{data: topcircle,    color: "black"}, 
+{data: bottomcircle, color: "black"}
 ];
 
 var unit_circle = $.plot($("#unit_circle"),  plotdata_unit_circle,
-{
-	xaxis:{
-		min :-1.5,
-		max: 1.5
-	},
-	yaxis:{
-		min :-1.5,
-		max: 1.5
-	}
+		{
+xaxis:{
+min :-1.5,
+max: 1.5
+},
+yaxis:{
+min :-1.5,
+max: 1.5
+}
 }
 );
 
+// Add markings to the unit circle 
 o = unit_circle.pointOffset({ x: 1, y: 0});
 $("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left+5) + 'px;top:' + (o.top-27/2) + 'px;color:#666;font-size:smaller">0/2\u03c0</div>');
 o = unit_circle.pointOffset({ x: 0, y: 1});
@@ -58,10 +59,10 @@ $("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.le
 o = unit_circle.pointOffset({ x: 0, y: -1});
 $("#unit_circle").append('<div id="test" style="position:absolute;left:' + (o.left-10) + 'px;top:' + (o.top) + 'px;color:#666;font-size:smaller">3\u03c0/2</div>');
 
+
 function newsin(){
 	var sinepointer = [];
 	var angle = $("#angle").val() * Math.PI; //* Math.PI;
-	console.log(angle);
 	var height = Math.sin(angle);
 	var distance = Math.cos(angle);
 	var sinus = [[distance, 0], [distance, height]];
@@ -69,28 +70,32 @@ function newsin(){
 	sinepointer.push([0,0], [distance, height]);
 
 	sinewave_plot.setData( 
-		[{data: sinewave},
+			[{data: sinewave},
 			{data: [[angle, 0], [angle, height]],
-				color: "red"
-			}
-	]);
+color: "red"
+}
+]);
 	sinewave_plot.draw();
 
 	var new_plotdata_unit_circle = plotdata_unit_circle;
 	new_plotdata_unit_circle[2] = {data: sinepointer, color:"blue"};
-	new_plotdata_unit_circle[3] = {data: sinus, color:"red"};
+new_plotdata_unit_circle[3] = {data: sinus, color:"red"};
 
-	unit_circle.setData(new_plotdata_unit_circle);
-	unit_circle.draw();
+unit_circle.setData(new_plotdata_unit_circle);
+unit_circle.draw();
 
-	// Set Degree legend
-	var angle_in_degree = Math.round(angle*180/Math.PI);
-	$("#degree").val(angle_in_degree);
-	$("#rad").val(tofraction(Math.round(angle/Math.PI*100)/100) + "\u03c0");
-	$("#sin").val(Math.round(height*100)/100);
+// Set Degree legend
+var angle_in_degree = Math.round(angle*180/Math.PI);
+$("#degree").text(angle_in_degree);
+var parts = tofraction(Math.round(angle/Math.PI*100)/100);
+$("#zaehler").text(parts[0]);
+$("#nenner").text(parts[1]);
+//	$("#rad").val(tofraction(Math.round(angle/Math.PI*100)/100) + "\u03c0");
+$("#sin").text(Math.round(height*1000)/1000);
 }
 
 function tofraction(n){
+	// Takes a float and returns the reduced fraction
 	if (n % 1 === 0){
 		return n;
 	}
@@ -107,7 +112,7 @@ function tofraction(n){
 			}
 		}
 		if (on === nenner){
-			return zaehler + "/"+ nenner;
+			return [zaehler, nenner];
 		}
 	}
 }
