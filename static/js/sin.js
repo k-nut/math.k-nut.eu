@@ -12,11 +12,11 @@ var sinewave_plot = $.plot($("#placeholder"), [sinewave],
 			0, [ Math.PI/2, "\u03c0/2" ], [ Math.PI, "\u03c0" ],
 			[ Math.PI * 3/2, "3\u03c0/2" ], [ Math.PI * 2, "2\u03c0" ]
 		]
-},
-yaxis: {
-	min: -1.5,
-	max: 1.5
-}
+	},
+	yaxis: {
+		min: -1.5,
+		max: 1.5
+	}
 });
 
 // Draw Einheitskreis 
@@ -41,11 +41,11 @@ var unit_circle = $.plot($("#unit_circle"),  plotdata_unit_circle,
 	xaxis:{
 		min :-1.5,
 		max: 1.5
-},
-yaxis:{
-	min :-1.5,
-	max: 1.5
-}
+	},
+	yaxis:{
+		min :-1.5,
+		max: 1.5
+	}
 }
 );
 
@@ -74,37 +74,38 @@ function newsin(){
 			{data: [[angle, 0], [angle, height]],
 				color: "red"
 			}
-]);
-sinewave_plot.draw();
+	]);
+	sinewave_plot.draw();
 
-var new_plotdata_unit_circle = plotdata_unit_circle;
-new_plotdata_unit_circle[2] = {data: sinepointer, color:"blue"};
-new_plotdata_unit_circle[3] = {data: sinus, color:"red"};
+	var new_plotdata_unit_circle = plotdata_unit_circle;
+	new_plotdata_unit_circle[2] = {data: sinepointer, color:"blue"};
+	new_plotdata_unit_circle[3] = {data: sinus, color:"red"};
 
-unit_circle.setData(new_plotdata_unit_circle);
-unit_circle.draw();
+	unit_circle.setData(new_plotdata_unit_circle);
+	unit_circle.draw();
+	draw_legend(angle, height);
 
-// Set Degree legend
-var angle_in_degree = Math.round(angle*180/Math.PI);
-$("#degree").text(angle_in_degree);
-
-var parts = tofraction(Math.round(angle/Math.PI*100)/100);
-if (parts[1] === 1){
-console.log("y");
-$("#fraction").hide();
-$("#whole_number").text(parts[0]).show();
-}
-else{
-console.log("n");
-$("#whole_number").hide();
-$("#fraction").show();
-$("#zaehler").text(parts[0]);
-$("#nenner").text(parts[1]);
 }
 
+function draw_legend(angle, sinvalue){
+	// Set Degree legend
+	var angle_in_degree = Math.round(angle*180/Math.PI);
+	$("#degree").text(angle_in_degree);
 
-$("#sin").text(Math.round(height*1000)/1000);
+	var parts = tofraction(Math.round(angle/Math.PI*100)/100);
+	if (parts[1] === 1){
+		$("#fraction").hide();
+		$("#whole_number").text(parts[0]).show();
+	}
+	else{
+		$("#whole_number").hide();
+		$("#fraction").show();
+		$("#zaehler").text(parts[0]);
+		$("#nenner").text(parts[1]);
+	}
+	$("#sin").text(Math.round(sinvalue*10000)/10000);
 }
+
 
 function tofraction(n){
 	// Takes a float and returns the reduced fraction
