@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Math visualizations | Cosinus </title>
+		<title>Math visualizations | Sinus</title>
 		<link href="/static/css/sin.css" rel="stylesheet" type="text/css">
 		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../excanvas.min.js"></script><![endif]-->
 		<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -14,9 +14,6 @@
 			}
 			td:nth-child(even){
 				text-align:left
-			}
-			.sinewavebox{
-				-webkit-transition: -webkit-transform 1s;
 			}
 		</style>
 
@@ -60,7 +57,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td><label for="sin"> Cosinuswert:  </label></td>
+				<td><label for="sin"> Sinuswert:  </label></td>
 				<td><math>
 					<mn id="sin"> 0.5 </mn>
 					</math>
@@ -68,9 +65,8 @@
 				<!--<input name="sin" id="sin" value="0"></td>-->
 		</tr>
 	</table>
-	<label for="turnbox"> Kurve drehen </label> <input id="turnbox" type="checkbox" onclick="turnbox()" />
 </div>
-<script type="text/javascript" src="/static/js/cos.js"></script>
+<script type="text/javascript" src="/static/js/sin.js"></script>
 <script language="javascript" type="text/javascript" src="/static/js/modernizr.js"></script>
 <script>
 	$(document).ready(function(){
@@ -83,17 +79,16 @@
 			// If ranges are not supported, load the slider script and CSS file
 			nope: [     
 			// The slider CSS file
-			//'http://www.frequency-decoder.com/demo/fd-slider/css/fd-slider.mhtml.min.css'       
+			'http://www.frequency-decoder.com/demo/fd-slider/css/fd-slider.mhtml.min.css'       
 			// The slider JS file
-			//,'http://www.frequency-decoder.com/demo/fd-slider/js/fd-slider.js'
-			'https://raw.github.com/fryn/html5slider/master/html5slider.js'
-			]/*,
+			,'http://www.frequency-decoder.com/demo/fd-slider/js/fd-slider.js'     
+			],
 			callback: function(id, testResult) {
 				// If the slider file has loaded then fire the onDomReady event        
 				if("fdSlider" in window && typeof (fdSlider.onDomReady) != "undefined") {
 					try { fdSlider.onDomReady(); } catch(err) {};
 				};
-			}*/
+			}
 		},
 		{
 			test: Modernizr.mathml,

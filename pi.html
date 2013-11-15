@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<script src="components/two/third-party/underscore.js" type="text/javascript" charset="utf-8"></script>
+		<script src="components/two/third-party/events.js" type="text/javascript" charset="utf-8"></script>
+		<script src="components/backbone/backbone.js" type="text/javascript" charset="utf-8"></script>
+		<script src="components/two.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="components/domready/ready.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/static/js/pi.js" type="text/javascript" charset="utf-8"></script>
+		<title>Calculating pi</title>
+
+	</head>
+	<body>
+		<form action="#">
+			<label for=number_of_points> Grid: </label>
+			<input id=number_of_points type="number" min=1 max=20 step=1 name="number_of_points" value="2" onChange="recalculate_grid();">
+		  <label for=number_of_points_random> Random: </label>
+			<input id=number_of_points_random type="number" min=1 max=2000 step=1 name="number_of_points" value="100" onChange="recalculate_random();">
+
+		</form>
+		<div id="draw-shapes" style="width: 400px; height: 400px;">
+			<div id="test" style="height: 200px;"> </div>
+		</div>
+
+		<h2> Calculated value for π </h2>
+		<p id="pi_value"></p>
+
+		<script type="text/javascript" charset="utf-8">
+			domready(function(){
+				setup();
+				recalculate_grid();
+			})
+
+		</script>
+	</body>
+</html>
