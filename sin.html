@@ -4,9 +4,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Math visualizations | Sinus</title>
 		<link href="/static/css/sin.css" rel="stylesheet" type="text/css">
-		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../excanvas.min.js"></script><![endif]-->
-		<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flot/0.7/jquery.flot.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flot/0.7/jquery.flot.min.js"></script>
 		<style>
 			td {
 				padding: 10px;
@@ -24,7 +23,7 @@
 		<div class="sinewavebox" style="float:left; width:600px">
 			<div id="placeholder" style="width:600px;height:300px;float:left;"></div>
 			<form action="#" style="float:left; width:600px">
-				<input id="angle" class="slider" type="range" min="0" max="2.0" step="0.01" value="0.33" onchange="newsin()">
+				<input id="angle" class="slider" type="range" min="0" max="2.0" step="0.01" value="0.33" onmousemove="newsin()">
 			</form>
 		</div>
 		<div id="unit_circle" style="width:300px;height:300px;float:left;"></div>
@@ -67,37 +66,8 @@
 	</table>
 </div>
 <script type="text/javascript" src="/static/js/sin.js"></script>
-<script language="javascript" type="text/javascript" src="/static/js/modernizr.js"></script>
 <script>
-	$(document).ready(function(){
-		newsin();
-		// Set up the yepnope (Modernizr.load) directives... 
-		Modernizr.load([
-		{
-			// Test if Input Range is supported using Modernizr
-			test: Modernizr.inputtypes.range,
-			// If ranges are not supported, load the slider script and CSS file
-			nope: [     
-			// The slider CSS file
-			'http://www.frequency-decoder.com/demo/fd-slider/css/fd-slider.mhtml.min.css'       
-			// The slider JS file
-			,'http://www.frequency-decoder.com/demo/fd-slider/js/fd-slider.js'     
-			],
-			callback: function(id, testResult) {
-				// If the slider file has loaded then fire the onDomReady event        
-				if("fdSlider" in window && typeof (fdSlider.onDomReady) != "undefined") {
-					try { fdSlider.onDomReady(); } catch(err) {};
-				};
-			}
-		},
-		{
-			test: Modernizr.mathml,
-			nope: [
-			'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML-full'
-			]
-		}
-		]);
-	});
+	document.addEventListener("DOMContentLoaded", newsin)
 </script>
 	</body>
 </html>

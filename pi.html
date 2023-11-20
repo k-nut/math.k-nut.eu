@@ -6,7 +6,6 @@
 		<script src="components/two/third-party/events.js" type="text/javascript" charset="utf-8"></script>
 		<script src="components/backbone/backbone.js" type="text/javascript" charset="utf-8"></script>
 		<script src="components/two.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="components/domready/ready.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/static/js/pi.js" type="text/javascript" charset="utf-8"></script>
 		<title>Calculating pi</title>
 
@@ -27,11 +26,10 @@
 		<p id="pi_value"></p>
 
 		<script type="text/javascript" charset="utf-8">
-			domready(function(){
+			document.addEventListener("DOMContentLoaded", () => {
 				setup();
 				recalculate_grid();
 			})
-
 		</script>
 	</body>
 </html>
